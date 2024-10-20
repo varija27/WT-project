@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Seats</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        header {
+            background-color: #4e4376;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-image: url('images/bg3.jpeg'); /* Add your image URL here */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .screen {
+            background-color: #3949ab;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            text-transform: uppercase;
+        }
+
+        .seats-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin: 0 auto;
+            justify-content: center;
+        }
+
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #e6e6e6;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            position: relative;
+        }
+
+        .seat:hover {
+            background-color: #5c6bc0;
+            transform: scale(1.1);
+        }
+
+        .seat.selected {
+            background-color: #3949ab;
+            color: white;
+        }
+
+        .seat.unavailable {
+            background-color: #757373;
+            cursor: not-allowed;
+        }
+
+        .seat.unavailable:hover {
+            transform: none;
+        }
+
+        .btn-confirm {
+            background-color: #3949ab;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-top: 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-confirm:hover {
+            background-color: #5c6bc0;
+        }
+
+        .timing-container {
+            margin-bottom: 20px;
+        }
+
+        .timing {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #e6e6e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .timing:hover {
+            background-color: #5c6bc0;
+            color: white;
+        }
+
+        .timing.selected {
+            background-color: #3949ab;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .seats-container {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .seats-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .seat {
+                width: 40px;
+                height: 40px;
+                font-size: 0.8rem;
+            }
+
+            .btn-confirm {
+                padding: 10px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Select Your Seats & Movie Timing</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="timing-container">
+                <h3>Select Movie Timing</h3>
+                <div class="timing" data-time="10:00 AM">10:00 AM</div>
+                <div class="timing" data-time="1:00 PM">1:00 PM</div>
+                <div class="timing" data-time="4:00 PM">4:00 PM</div>
+                <div class="timing" data-time="7:00 PM">7:00 PM</div>
+                <div class="timing" data-time="10:00 PM">10:00 PM</div>
+            </div>
+
+            <div class="screen">Screen</div>
+
+            <!-- Seat Layout -->
+            <div class="seats-container" id="seatsContainer">
+                <!-- Seats will be rendered here -->
+            </div>
+
+            <!-- Confirm Button -->
+            <a href="#" class="btn-confirm" id="confirmBooking">Confirm Booking</a>
+        </div>
+    </main>
+
+    <script>
+        // Sample seat availability data (30 seats)
+        const seats = [
+            { id: 1, available: true },
+            { id: 2, available: true },
+            { id: 3, available: true },
+            { id: 4, available: false }, // Unavailable seat
+            { id: 5, available: true },
+            { id: 6, available: true },
+            { id: 7, available: true },
+            { id: 8, available: false }, // Unavailable seat
+            { id: 9, available: true },
+            { id: 10, available: true },
+            { id: 11, available: true },
+            { id: 12, available: false }, // Unavailable seat
+            { id: 13, available: true },
+            { id: 14, available: true },
+            { id: 15, available: true },
+            { id: 16, available: true },
+            { id: 17, available: true },
+            { id: 18, available: true },
+            { id: 19, available: true },
+            { id: 20, available: false }, // Unavailable seat
+            { id: 21, available: true },
+            { id: 22, available: true },
+            { id: 23, available: true },
+            { id: 24, available: true },
+            { id: 25, available: true },
+            { id: 26, available: true },
+            { id: 27, available: false }, // Unavailable seat
+            { id: 28, available: true },
+            { id: 29, available: true },
+            { id: 30, available: true },
+        ];
+
+        const selectedSeats = new Set(); // Store selected seat ids
+        let selectedTime = '10:00 AM'; // Set default selected movie timing
+
+        // Render seats
+        function renderSeats() {
+            const seatsContainer = document.getElementById('seatsContainer');
+            seatsContainer.innerHTML = ''; // Clear previous seats
+
+            seats.forEach((seat) => {
+                const seatElement = document.createElement('div');
+                seatElement.classList.add('seat');
+                seatElement.textContent = seat.id;
+
+                // Mark as unavailable if the seat is not available
+                if (!seat.available) {
+                    seatElement.classList.add('unavailable');
+                }
+
+                // Clickable only if available
+                if (seat.available) {
+                    seatElement.addEventListener('click', () => toggleSeatSelection(seat.id, seatElement));
+                }
+
+                seatsContainer.appendChild(seatElement);
+            });
+        }
+
+        // Toggle seat selection
+        function toggleSeatSelection(seatId, seatElement) {
+            if (selectedSeats.has(seatId)) {
+                selectedSeats.delete(seatId);
+                seatElement.classList.remove('selected');
+            } else {
+                selectedSeats.add(seatId);
+                seatElement.classList.add('selected');
+            }
+        }
+
+        // Handle timing selection
+        const timingElements = document.querySelectorAll('.timing');
+        timingElements.forEach((timingElement) => {
+            timingElement.addEventListener('click', () => {
+                // Deselect previously selected timing
+                document.querySelectorAll('.timing').forEach((el) => el.classList.remove('selected'));
+                // Select new timing
+                timingElement.classList.add('selected');
+                selectedTime = timingElement.getAttribute('data-time');
+            });
+        });
+
+        // Set default selected time visually
+        timingElements.forEach((el) => {
+            if (el.getAttribute('data-time') === selectedTime) {
+                el.classList.add('selected');
+            }
+        });
+
+        // Handle confirmation
+        document.getElementById('confirmBooking').addEventListener('click', () => {
+            if (selectedSeats.size > 0 && selectedTime) {
+                alert(`You have selected seats: ${Array.from(selectedSeats).join(', ')} for ${selectedTime}.`);
+                resetSelection(); // Reset the selection after confirmation
+            } else if (!selectedTime) {
+                alert('Please select a movie time.');
+            } else {
+                alert('Please select at least one seat.');
+            }
+        });
+
+        // Function to reset seat selections
+        function resetSelection() {
+            selectedSeats.clear(); // Clear selected seats
+            selectedTime = ''; // Clear selected time
+            renderSeats(); // Re-render seats to update the UI
+            document.querySelectorAll('.timing').forEach((el) => el.classList.remove('selected')); // Deselect timings
+        }
+
+        // Reset the selection when the user exits the screen
+        window.onbeforeunload = function () {
+            resetSelection();
+        };
+
+        // Initial render of seats
+        renderSeats();
+    </script>
+</body>
+</html>

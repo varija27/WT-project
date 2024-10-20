@@ -1,0 +1,547 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700&display=swap');
+
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto Condensed', sans-serif; 
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+    
+    body::before {
+        font-family: 'Roboto Condensed'; 
+        background-color: #f0ead6;
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('images/bg1.jpg'); /* Path to your background image */
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        filter: blur(5px); /* Adjust the blur as needed */
+        z-index: -1; /* Keep the background behind the content */
+    }
+
+/* Header Styles */
+header {
+    background-color: #8c6e63;
+    color: white;
+    padding: 15px;
+  }
+  
+  header .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  header nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+header nav {
+    margin-top: 10px;
+    font-weight: 200;
+}
+
+/* Media query for mobile menu */
+@media (max-width: 768px) {
+    header nav a {
+      display: block;
+      margin: 10px 0;
+    }
+  }
+
+/* Main Content */
+main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: rgba(248, 249, 250, 0.7); /* Slightly transparent background for readability */
+    padding: 60px 0;
+  }
+
+   main h1 {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #343a40;
+        }
+
+/* Page title */
+.r1 {
+    font-weight: 600;
+    font-size: 30px;
+    color: #292c36;
+}
+
+/* Layout container */
+#moviesContainer {
+    display: flex;
+    gap: 50px;
+}
+
+/* Filter Section */
+.filter-btn {
+    padding: 8px 12px;
+    margin: 5px;
+    background-color: #e1e1e1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+.filter-btn:hover {
+    background-color: #d1d1d1;
+}
+
+/* Browse by Cinemas Button */
+.browse-cinemas .btn {
+    width: 100%;
+    padding: 10px 0;
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+/* Filter Section Layout */
+.filters {
+    background-color: #f8f8f8;
+    padding: 15px;
+    width: 220px;
+    border-radius: 8px;
+  }
+
+.filters h4 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group h5 {
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.clear-btn {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+.browse-cinemas {
+    margin-top: 30px;
+}
+
+.browse-cinemas .btn {
+    width: 100%;
+    color: red;
+    border: 1px solid red;
+    padding: 10px;
+    text-align: center;
+    background-color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Movie Cards Section */
+.movie-section {
+    flex-grow: 1;
+  }
+  
+  .movie-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .movie-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .movie-cards .card {
+    width: 180px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+.card img {
+    width: 100%;  /* Ensures the image occupies the full width of its container */
+    height: auto; /* Maintains the aspect ratio */
+  }
+
+.movie-cards .card:hover {
+    transform: scale(1.05);
+}
+
+.movie-cards .card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.movie-cards .card-body {
+    padding: 10px;
+  }
+
+.movie-cards .card-title {
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.movie-cards .card-text {
+    color: #757575;
+}
+
+.movie-cards .btn {
+    background-color: #8c6e63;
+    color: white;
+  }
+  
+  .movie-cards .btn:hover {
+    background-color: #6f4f4b;
+  }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #moviesContainer {
+        flex-direction: column;
+    }
+
+    .filters {
+        width: 100%;
+    }
+
+    .movie-cards {
+        justify-content: center;
+    }
+
+    .movie-cards .card {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .movie-cards .card {
+        padding: 10px;
+        margin: 10px 0; /* Adds some space between the cards on mobile */
+    }
+
+    main {
+        padding: 10px; /* Padding for the entire content area on mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    header .logo {
+        text-align: center;
+    }
+
+    .movie-section h2 {
+        text-align: center;
+    }
+
+    .filters h4 {
+        text-align: center;
+    }
+}
+
+
+    /* ... existing styles ... */
+
+    .see-all-container {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        padding: 0 15px; /* Add padding to prevent button from touching the edges */
+    }
+
+    .see-all-btn {
+        background-color: #8c6e63;
+        color: white;
+        padding: 12px 30px; /* Set a consistent padding for both mobile and laptop */
+        border: none;
+        border-radius: 5px;
+        font-size: 18px; /* Base font size */
+        text-decoration: none;
+        text-align: center; /* Center the text in the button */
+        transition: background-color 0.3s; /* Smooth transition effect */
+        min-width: 150px; /* Set a minimum width for consistency */
+    }
+
+    .see-all-btn:hover {
+        background-color: #6f4f4b; /* Darker shade on hover */
+    }
+
+    @media (max-width: 768px) {
+        .see-all-btn {
+            font-size: 16px; /* Slightly smaller font size on mobile */
+            padding: 10px 25px; /* Adjusted padding for mobile */
+            min-width: 120px; /* Adjust minimum width for mobile */
+        }
+    }
+
+/* Footer Styles */
+footer {
+    background-color: #494d5f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+  }
+  
+  @media (max-width: 768px) {
+    footer {
+      font-size: 14px;
+    }
+  }
+
+ /* Footer Styles */
+ footer {
+    background-color: #494d5f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* For login/signup pages */
+
+/* Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.auth-box h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btnfr {
+    width: 100%;
+    padding: 10px;
+    background-color: #8c6e63;
+    border: none;
+    color: #292c36;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px
+}
+
+.error-msg {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-box {
+        width: 90%;
+    }
+}
+
+ /* Offers Container */
+ .c1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.offers {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: left;
+    transition: transform 0.2s;
+}
+
+.offers:hover {
+    transform: scale(1.05);
+}
+
+.c2 {
+    padding: 20px;
+}
+
+.c2-img {
+    width: 100%;
+    border-radius: 8px;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.c2-body p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.c2-body p:first-child {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Parent container */
+#contactContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 100% of the viewport height */
+    background-color: #f5f5f5; /* Optional: Background color for the page */
+}
+
+/* Contact Us Page */
+/* Form container */
+#contactForm {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+}
+
+/* Form group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #292c36;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.form-control:focus {
+    border-color: #8c6e63;
+    outline: none;
+}
+
+textarea.form-control {
+    height: 150px;
+    resize: none;
+}
+
+/* Submit button */
+button[type="submit"] {
+    background-color: #8c6e63;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+    background-color: #6f4f4b;
+}
+
+
+        /* Responsive form */
+        @media (max-width: 768px) {
+            #contactForm {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            label, .form-control {
+                font-size: 14px;
+            }
+
+            button[type="submit"] {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F0EAD6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #8c6e63;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        footer {
+            background-color: #494d5f;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        /* Movie details layout */
+        .movie-container {
+            display: flex;
+            margin-top: 20px;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .movie-image {
+            max-width: 350px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .movie-info {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .movie-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .movie-stats {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .movie-stats .interested {
+            background-color: #eee;
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+
+        .format-genre {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .movie-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-book {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            main {
+                padding: 10px;
+            }
+
+            .movie-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .movie-info {
+                text-align: center;
+            }
+
+            .movie-title {
+                font-size: 1.5rem;
+            }
+
+            .movie-stats {
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .format-genre {
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .movie-description {
+                font-size: 0.9rem;
+            }
+
+            .btn-book {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .movie-title {
+                font-size: 1.2rem;
+            }
+
+            .btn-book {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Movie Details</h1>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="movie-container">
+                <!-- Movie Poster -->
+                <img id="movie-image" class="movie-image" src="" alt="Movie Image">
+                <!-- Movie Details -->
+                <div class="movie-info">
+                    <h2 id="movie-title" class="movie-title">Loading...</h2>
+                    <div class="movie-stats">
+                        <div id="movie-interest" class="interested">21.7K are interested</div>
+                        <div class="format-genre">
+                            <span id="movie-format">2D</span>
+                            <span id="movie-genre">Action, Drama</span>
+                            <span id="movie-rating">UA</span>
+                        </div>
+                        <div id="movie-duration">2h 43m</div>
+                    </div>
+                    <p id="movie-description" class="movie-description">Movie description will appear here.</p>
+                    <a href="seats.html?id=<%= movieId %>" class="btn-book">Book Tickets</a>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MovieBooking. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Movie Data
+        const movies = [
+            {
+                id: 1,
+                title: "Deadpool 3",
+                description: " Wade Wilson (Deadpool) is back! Armed with his signature wit and a healing factor, he’s once again thrust into chaotic circumstances. But this time, he teams up with none other than Wolverine. Together, they face a new villain with powers that could tear their world apart. With unexpected twists, meta-humor, and an emotional undercurrent, this installment promises to deliver both laughs and high-octane action.",
+                interest: "50.4K",
+                format: "2D, IMAX",
+                genre: "Action, Comedy",
+                rating: "R",
+                duration: "2h 20m",
+                image: "images/1.jpg"
+            },
+            {
+                id: 2,
+                title: "Bad Newz",
+                description: "Saloni Bagga, a rising chef, is at the top of her career when her marriage and personal life start to unravel. As she loses her job and faces the pressures of societal expectations, she must decide between following her passion or compromising for stability. A heartfelt drama exploring the complexities of love, career aspirations, and the sacrifices one makes for success.",
+                interest: "13.8K",
+                format: "2D",
+                genre: "Drama, Romance",
+                rating: "PG-13",
+                duration: "1h 55m",
+                image: "images/2.jpg"
+            },
+            {
+                id: 3,
+                title: "Kalki 2898 AD",
+                description: "Set in a dystopian future, Kalki 2898 AD explores a world where technology and ancient myths collide. The film follows Kalki, the last hope of humanity, as he embarks on a quest to restore balance in a fractured, apocalyptic landscape. Drawing inspiration from Indian mythology, this futuristic sci-fi thriller paints a world of advanced technology, massive conflicts, and a fight for survival.",
+                interest: "21.5K",
+                format: "2D, IMAX",
+                genre: "Sci-Fi, Drama",
+                rating: "UA",
+                duration: "2h 40m",
+                image: "images/3.jpg"
+            },
+            {
+                id: 4,
+                title: "Sarfira",
+                description: "Vir Jagannath Mhatre, a fearless and ambitious young man, dreams of revolutionizing air travel by creating a budget airline for the masses. But his father, a traditionalist, is vehemently against his son’s dream. Set against the backdrop of family conflict and social change, Sarfira combines intense action sequences with an emotional journey of a man determined to fight for his beliefs.",
+                interest: "8.9K",
+                format: "2D",
+                genre: "Action, Drama",
+                rating: "UA",
+                duration: "2h 30m",
+                image: "images/4.jpg"
+            },
+            {
+                id: 5,
+                title: "Kill",
+                description: "In a pulse-pounding thriller, NSG commando Amrit Rathod is pushed to the brink as he battles to save his loved ones from a ruthless enemy. Set in a high-stakes environment where every second counts, Kill is a tense action-packed film where personal vendettas, love, and revenge drive the characters toward a heart-racing finale.",
+                interest: "7.2K",
+                format: "2D",
+                genre: "Action, Thriller",
+                rating: "UA",
+                duration: "2h 10m",
+                image: "images/5.jpg"
+            },
+            {
+                id: 6,
+                title: "Joker: Folie à Deux",
+                description: "Arthur Fleck, once an outcast in society, has fully embraced his identity as the Joker. But with a new player entering his life, someone just as twisted and broken, the lines between reality and madness blur even further. This psychological drama dives deep into themes of mental illness, identity, and chaos, offering a chilling exploration of how society can create its own monsters.",
+                interest: "100.3K",
+                format: "2D",
+                genre: "Drama, Thriller",
+                rating: "R",
+                duration: "2h 35m",
+                image: "images/6.jpg"
+            },
+            {
+                id: 7,
+                title: "Stree 2: Sarkata Ka Aatank",
+                description: " In this horror-comedy sequel, the peaceful town of Chanderi is once again threatened, but this time by Sarkata, a headless spirit who abducts women. The beloved characters from the first film must come together once again to solve this supernatural mystery. With quirky humor, spooky moments, and heartfelt friendships, this film strikes a perfect balance between horror and comedy.",
+                interest: "17.9K",
+                format: "2D",
+                genre: "Horror, Comedy",
+                rating: "UA",
+                duration: "2h 25m",
+                image: "images/7.jpg"
+            },
+            {
+                id: 8,
+                title: "Venom: The Last Dance",
+                description: "Venom and Eddie Brock are on the run, facing threats from both human and alien enemies. With their backs against the wall, they must make a series of desperate decisions to survive. As Eddie grapples with his complicated relationship with the symbiote, 'The Last Dance' brings their story to a poignant and explosive conclusion, with high-stakes action and unexpected sacrifices.",
+                interest: "167.1K",
+                format: "3D",
+                genre: "Action, Sci-fi",
+                rating: "UA",
+                duration: "1h 50m",
+                image: "images/8.jpg"
+            },
+            {
+                id: 9,
+                title: "Devara",
+                description: "Set in rural India, Devara is a warrior with a strong moral code who rises against the corrupt forces threatening his people. With breathtaking action sequences, 'Devara' is an emotional and thrilling tale of revenge, loyalty, and justice. It explores the darker aspects of human nature and the price one must pay for vengeance.",
+                interest: "89.3K",
+                format: "2D, IMAX",
+                genre: "Action, Drama",
+                rating: "UA",
+                duration: "2h 45m",
+                image: "images/9.jpg"
+            },
+            {
+                id: 10,
+                title: "Udaan Choo",
+                description: "A light-hearted and inspirational film about a small-town boy with dreams of flying. Held back by societal norms and family responsibilities, he defies the odds to pursue his passion for aviation. 'Udaan Choo' is filled with heartwarming moments and laughs as this young man soars above the challenges in his life to chase his dreams.",
+                interest: "35.7K",
+                format: "2D",
+                genre: "Comedy, Drama",
+                rating: "PG",
+                duration: "1h 50m",
+                image: "images/11.jpg"
+            },
+            {
+                id: 11,
+                title: "Jigara",
+                description: "Set in the ancient Rajput era, Jigara tells the story of bravery, betrayal, and war. Amid political conspiracies and treacherous enemies, the Rajput kings must unite to fight for their homeland. With grand battle sequences, stunning visuals, and an epic tale of courage and sacrifice, 'Jigara' transports audiences to a time of honor, valor, and rebellion.",
+                interest: "70.1K",
+                format: "2D",
+                genre: "Action, Historical",
+                rating: "UA",
+                duration: "2h 30m",
+                image: "images/12.jpg"
+            },
+            {
+                id: 12,
+                title: "The Wild Robot",
+                description: "Based on the popular children’s book, this family adventure follows Roz, a robot who wakes up alone on a deserted island. With no memory of how she got there, Roz must learn to survive and coexist with the island’s wildlife. Over time, she forms unexpected bonds with the animals, discovering her true purpose in the process.",
+                interest: "42.6K",
+                format: "2D",
+                genre: "Adventure, Family",
+                rating: "PG",
+                duration: "1h 40m",
+                image: "images/13.jpg"
+            },
+            {
+                id: 13,
+                title: "Vettaiayan",
+                description: "In the dense forests of South India, a group of hunters ventures into uncharted territory, only to face a mysterious and terrifying force lurking within the shadows. 'Vettaiayan' is a gripping thriller that blends folklore, suspense, and survival. As the group fights to escape, the line between reality and myth blurs, leaving them questioning what is real and what is not.",
+                interest: "52.4K",
+                format: "2D",
+                genre: "Thriller, Mystery",
+                rating: "UA",
+                duration: "2h 20m",
+                image: "images/14.jpg"
+            }
+        ];
+
+        // Function to get query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Fetch the movie id from the URL
+        const movieId = getQueryParam('id');
+
+        // Find the movie data based on the id
+        const movie = movies.find(movie => movie.id == movieId);
+
+        if (movie) {
+            document.getElementById('movie-title').textContent = movie.title;
+            document.getElementById('movie-description').textContent = movie.description;
+            document.getElementById('movie-image').src = movie.image;
+            document.getElementById('movie-interest').textContent = `${movie.interest} are interested`;
+            document.getElementById('movie-format').textContent = movie.format;
+            document.getElementById('movie-genre').textContent = movie.genre;
+            document.getElementById('movie-rating').textContent = movie.rating;
+            document.getElementById('movie-duration').textContent = movie.duration;
+        } else {
+            document.getElementById('movie-title').textContent = "Movie not found";
+        }
+    </script>
+</body>
+
+</html>
